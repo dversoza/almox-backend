@@ -5,7 +5,6 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -48,7 +47,6 @@ public class Movimentacao implements Serializable {
 
     private String operacao;
 
-    @ColumnDefault("INTERNA")
     private String tipo;
     private Date dataFato;
     private Float quantidade;
