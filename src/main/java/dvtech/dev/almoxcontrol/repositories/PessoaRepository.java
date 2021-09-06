@@ -10,4 +10,6 @@ import dvtech.dev.almoxcontrol.models.Pessoa;
 @Repository
 public interface PessoaRepository extends JpaRepository<Pessoa, Integer> {
     Optional<Pessoa> findPessoaByDocumento(String documento);
+
+    Optional<Pessoa> findPessoaByNome(String nome);
 }

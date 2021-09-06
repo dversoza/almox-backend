@@ -15,9 +15,7 @@ public class Pessoa implements Serializable {
     @Column(nullable = false, updatable = false, unique = true)
     private Integer id;
     private String nome;
-    private Boolean pessoaFisica;
-
-    @Column(unique = true)
+    private Boolean pessoaJuridica;
     private String documento;
     private String telefone;
 
@@ -29,30 +27,30 @@ public class Pessoa implements Serializable {
     public Pessoa() {
     }
 
-    public Pessoa(Integer id, String nome, Boolean pessoaFisica,
+    public Pessoa(Integer id, String nome, Boolean pessoaJuridica,
             String documento, String telefone, Barraca barraca) {
         this.id = id;
         this.nome = nome;
-        this.pessoaFisica = pessoaFisica;
+        this.pessoaJuridica = pessoaJuridica;
         this.documento = documento;
         this.telefone = telefone;
         this.barraca = barraca;
     }
 
-    public Pessoa(String nome, Boolean pessoaFisica, String documento,
+    public Pessoa(String nome, Boolean pessoaJuridica, String documento,
             String telefone, Barraca barraca) {
         this.nome = nome;
-        this.pessoaFisica = pessoaFisica;
+        this.pessoaJuridica = pessoaJuridica;
         this.documento = documento;
         this.telefone = telefone;
         this.barraca = barraca;
     }
 
-    public Pessoa(Integer id, String nome, Boolean pessoaFisica,
+    public Pessoa(Integer id, String nome, Boolean pessoaJuridica,
             String documento, String telefone) {
         this.id = id;
         this.nome = nome;
-        this.pessoaFisica = pessoaFisica;
+        this.pessoaJuridica = pessoaJuridica;
         this.documento = documento;
         this.telefone = telefone;
     }
@@ -73,12 +71,12 @@ public class Pessoa implements Serializable {
         this.nome = nome;
     }
 
-    public Boolean getPessoaFisica() {
-        return this.pessoaFisica;
+    public Boolean getPessoaJuridica() {
+        return this.pessoaJuridica;
     }
 
-    public void setPessoaFisica(Boolean pessoaFisica) {
-        this.pessoaFisica = pessoaFisica;
+    public void setPessoaJuridica(Boolean pessoaJuridica) {
+        this.pessoaJuridica = pessoaJuridica;
     }
 
     public String getDocumento() {
@@ -108,8 +106,8 @@ public class Pessoa implements Serializable {
     @Override
     public String toString() {
         return "Pessoa [barraca=" + barraca + ", documento=" + documento
-                + ", id=" + id + ", nome=" + nome + ", pessoaFisica="
-                + pessoaFisica + ", telefone=" + telefone + "]";
+                + ", id=" + id + ", nome=" + nome + ", pessoaJuridica="
+                + pessoaJuridica + ", telefone=" + telefone + "]";
     }
 
 }

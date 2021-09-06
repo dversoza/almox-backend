@@ -21,10 +21,10 @@ public class PessoaService {
 
     public Pessoa addPessoa(Pessoa pessoa) {
         Optional<Pessoa> pessoaOptional = pessoaRepository
-                .findPessoaByDocumento(pessoa.getDocumento());
+                .findPessoaByNome(pessoa.getNome());
         if (pessoaOptional.isPresent()) {
             throw new IllegalStateException(
-                    "Já existe uma pessoa cadastrada para o documento especificado!");
+                    "Já existe uma pessoa cadastrada com este nome!");
         } else {
             return pessoaRepository.save(pessoa);
         }

@@ -21,6 +21,9 @@ public class MovimentacaoService {
     }
 
     public Movimentacao addMovimentacao(Movimentacao movimentacao) {
+        if (movimentacao.getTipo() == null) {
+            movimentacao.setTipo("INTERNA");
+        }
         return movimentacaoRepository.save(movimentacao);
     }
 
