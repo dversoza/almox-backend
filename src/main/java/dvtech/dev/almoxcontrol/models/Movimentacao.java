@@ -5,6 +5,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -40,6 +42,7 @@ public class Movimentacao implements Serializable {
     private Barraca barraca;
 
     @ManyToOne
+    @JsonIgnoreProperties("movimentacoes")
     private Produto produto;
 
     @ManyToOne

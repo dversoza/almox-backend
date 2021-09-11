@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import org.springframework.data.annotation.ReadOnlyProperty;
+import org.hibernate.annotations.Formula;
 
 @Entity
 @Table
@@ -22,8 +22,7 @@ public class Produto implements Serializable {
     @JoinColumn
     private UnidadeMedida unidadeMedida;
 
-    // Estoque do produto
-    @ReadOnlyProperty
+    @Formula("(select sum(case when mov.operacao = 'ENTRADA' then mov.quantidade else mov.quantidade * -1 end) from movimentacao mov inner join Produto p on p.id = mov.produto_id where mov.produto_id = id)")
     private Integer estoque;
 
     public Produto() {
@@ -86,11 +85,15 @@ public class Produto implements Serializable {
         this.unidadeMedida = unidadeMedida;
     }
 
+    public Integer getEstoque() {
+        return estoque;
+    }
+
     @Override
     public String toString() {
         return "Produto {descricao=" + descricao + ", id=" + id + ", imagemURL="
                 + imagemURL + ", nome=" + nome + ", unidadeMedida="
-                + unidadeMedida + "}";
+                + unidadeMedida + ", estoque=" + estoque + "}";
     }
 
 }

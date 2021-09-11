@@ -10,4 +10,5 @@ import dvtech.dev.almoxcontrol.models.Produto;
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
     Optional<Produto> findProdutoByNome(String nome);
+
 }

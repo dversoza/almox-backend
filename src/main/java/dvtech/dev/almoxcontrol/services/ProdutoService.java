@@ -59,5 +59,4 @@ public class ProdutoService {
     public List<Produto> findAllProdutos() {
         return produtoRepository.findAll();
     }
-
 }
