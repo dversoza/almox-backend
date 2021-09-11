@@ -13,27 +13,27 @@ public class Usuario implements Serializable {
     @Column(nullable = false, updatable = false, unique = true)
     private Integer id;
     private boolean ativo;
-    private boolean admin;
+    private String perfil;
 
-    @ManyToOne
+    @ManyToOne(optional = true)
     private Pessoa pessoa;
     private String login;
     private String senha;
 
-    public Usuario(Integer id, boolean ativo, boolean admin, Pessoa pessoa,
+    public Usuario(Integer id, boolean ativo, String perfil, Pessoa pessoa,
             String login, String senha) {
         this.id = id;
         this.ativo = ativo;
-        this.admin = admin;
+        this.perfil = perfil;
         this.pessoa = pessoa;
         this.login = login;
         this.senha = senha;
     }
 
-    public Usuario(boolean ativo, boolean admin, Pessoa pessoa, String login,
+    public Usuario(boolean ativo, String perfil, Pessoa pessoa, String login,
             String senha) {
         this.ativo = ativo;
-        this.admin = admin;
+        this.perfil = perfil;
         this.pessoa = pessoa;
         this.login = login;
         this.senha = senha;
@@ -58,12 +58,12 @@ public class Usuario implements Serializable {
         this.ativo = ativo;
     }
 
-    public boolean isAdmin() {
-        return admin;
+    public String getPerfil() {
+        return perfil;
     }
 
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 
     public Pessoa getPessoa() {
@@ -92,7 +92,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario {admin=" + admin + ", ativo=" + ativo + ", id=" + id
+        return "Usuario {perfil=" + perfil + ", ativo=" + ativo + ", id=" + id
                 + ", login=" + login + ", pessoa=" + pessoa + ", senha=" + senha
                 + "}";
     }
