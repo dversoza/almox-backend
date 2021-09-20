@@ -23,8 +23,7 @@ public class MovimentacaoController {
 
     @GetMapping
     public ResponseEntity<List<Movimentacao>> getAllMovimentacoes() {
-        List<Movimentacao> movimentacoes = movimentacaoService
-                .findAllMovimentacoes();
+        List<Movimentacao> movimentacoes = movimentacaoService.findAllMovimentacoes();
         return new ResponseEntity<>(movimentacoes, HttpStatus.OK);
     }
 
@@ -34,26 +33,21 @@ public class MovimentacaoController {
         return new ResponseEntity<>(movimentacao, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/criar")
-    public ResponseEntity<Movimentacao> createMovimentacao(
-            @RequestBody Movimentacao movimentacao) {
-        Movimentacao movimentacaoCriada = movimentacaoService
-                .addMovimentacao(movimentacao);
+    @PostMapping(path = "/create")
+    public ResponseEntity<Movimentacao> createMovimentacao(@RequestBody Movimentacao movimentacao) {
+        Movimentacao movimentacaoCriada = movimentacaoService.addMovimentacao(movimentacao);
         return new ResponseEntity<>(movimentacaoCriada, HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/atualizar")
-    public ResponseEntity<Movimentacao> updateMovimentacao(
-            @RequestBody Movimentacao movimentacao) {
-        Movimentacao movimentacaoAtualizada = movimentacaoService
-                .updateMovimentacao(movimentacao);
+    @PutMapping(path = "/update")
+    public ResponseEntity<Movimentacao> updateMovimentacao(@RequestBody Movimentacao movimentacao) {
+        Movimentacao movimentacaoAtualizada = movimentacaoService.updateMovimentacao(movimentacao);
         return new ResponseEntity<>(movimentacaoAtualizada, HttpStatus.OK);
     }
 
     @Transactional
-    @DeleteMapping(path = "/excluir/{id}")
-    public ResponseEntity<Movimentacao> deleteMovimentacao(
-            @PathVariable Long id) {
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<Movimentacao> deleteMovimentacao(@PathVariable Long id) {
         movimentacaoService.deleteMovimentacao(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

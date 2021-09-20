@@ -28,28 +28,26 @@ public class BarracaController {
     }
 
     @GetMapping("/{idBarraca}")
-    public ResponseEntity<Barraca> getBarracaByIdBarraca(
-            @PathVariable("idBarraca") Integer idBarraca) {
+    public ResponseEntity<Barraca> getBarracaByIdBarraca(@PathVariable("idBarraca") Integer idBarraca) {
         Barraca barraca = barracaService.findBarracaById(idBarraca);
         return new ResponseEntity<>(barraca, HttpStatus.OK);
     }
 
-    @PostMapping("/criar")
+    @PostMapping("/create")
     public ResponseEntity<Barraca> addBarraca(@RequestBody Barraca barraca) {
         Barraca newBarraca = barracaService.addBarraca(barraca);
         return new ResponseEntity<>(newBarraca, HttpStatus.CREATED);
     }
 
-    @PutMapping("/editar")
+    @PutMapping("/update")
     public ResponseEntity<Barraca> updateBarraca(@RequestBody Barraca barraca) {
         Barraca updatedBarraca = barracaService.updateBarraca(barraca);
         return new ResponseEntity<>(updatedBarraca, HttpStatus.OK);
     }
 
     @Transactional
-    @DeleteMapping(path = "/excluir/{idBarraca}")
-    public ResponseEntity<?> deleteBarraca(
-            @PathVariable("idBarraca") Integer idBarraca) {
+    @DeleteMapping(path = "/delete/{idBarraca}")
+    public ResponseEntity<?> deleteBarraca(@PathVariable("idBarraca") Integer idBarraca) {
         barracaService.deleteBarraca(idBarraca);
         return new ResponseEntity<>(HttpStatus.OK);
     }

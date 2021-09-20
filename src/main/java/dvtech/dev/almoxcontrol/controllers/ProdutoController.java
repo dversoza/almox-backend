@@ -34,25 +34,24 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Produto> getProdutoById(
-            @PathVariable("id") Integer id) {
+    public ResponseEntity<Produto> getProdutoById(@PathVariable("id") Integer id) {
         Produto produto = produtoService.findProdutoById(id);
         return new ResponseEntity<>(produto, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/criar")
+    @PostMapping(path = "/create")
     public ResponseEntity<Produto> createProduto(@RequestBody Produto produto) {
         Produto produtoCriado = produtoService.addProduto(produto);
         return new ResponseEntity<>(produtoCriado, HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/atualizar")
+    @PutMapping(path = "/update")
     public ResponseEntity<Produto> updateProduto(@RequestBody Produto produto) {
         Produto produtoAtualizado = produtoService.updateProduto(produto);
         return new ResponseEntity<>(produtoAtualizado, HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/excluir/{id}")
+    @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<?> deleteProduto(@PathVariable("id") Integer id) {
         produtoService.deleteProduto(id);
         return new ResponseEntity<>(HttpStatus.OK);

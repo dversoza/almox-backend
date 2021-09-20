@@ -42,26 +42,25 @@ public class UsuarioController {
     }
 
     @GetMapping(path = "/{login}")
-    public ResponseEntity<Usuario> getUsuarioByLogin(
-            @RequestParam("login") String login) {
+    public ResponseEntity<Usuario> getUsuarioByLogin(@RequestParam("login") String login) {
         Usuario usuario = usuarioService.findUsuarioByLogin(login);
         return new ResponseEntity<>(usuario, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/criar")
+    @PostMapping(path = "/create")
     public ResponseEntity<Usuario> createUsuario(@RequestBody Usuario usuario) {
         Usuario created = usuarioService.addUsuario(usuario);
         return new ResponseEntity<>(created, HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/atualizar")
+    @PutMapping(path = "/update")
     public ResponseEntity<Usuario> updateUsuario(@RequestBody Usuario usuario) {
         Usuario updated = usuarioService.updateUsuario(usuario);
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }
 
     @Transactional
-    @DeleteMapping(path = "/excluir/{id}")
+    @DeleteMapping(path = "/delete/{id}")
     public ResponseEntity<?> deleteUsuario(@RequestParam("id") Integer id) {
         usuarioService.deleteUsuario(id);
         return new ResponseEntity<>(HttpStatus.OK);

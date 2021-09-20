@@ -29,28 +29,26 @@ public class PessoaController {
     }
 
     @GetMapping("/{idPessoa}")
-    public ResponseEntity<Pessoa> getPessoaById(
-            @PathVariable("idPessoa") Integer idPessoa) {
+    public ResponseEntity<Pessoa> getPessoaById(@PathVariable("idPessoa") Integer idPessoa) {
         Pessoa pessoa = pessoaService.findPessoaById(idPessoa);
         return new ResponseEntity<>(pessoa, HttpStatus.OK);
     }
 
-    @PostMapping("/criar")
+    @PostMapping("/create")
     public ResponseEntity<Pessoa> createPessoa(@RequestBody Pessoa pessoa) {
         Pessoa newPessoa = pessoaService.addPessoa(pessoa);
         return new ResponseEntity<>(newPessoa, HttpStatus.OK);
     }
 
-    @PutMapping("/editar")
+    @PutMapping("/update")
     public ResponseEntity<Pessoa> updatePessoa(@RequestBody Pessoa pessoa) {
         Pessoa updatedPessoa = pessoaService.updatePessoa(pessoa);
         return new ResponseEntity<>(updatedPessoa, HttpStatus.OK);
     }
 
     @Transactional
-    @DeleteMapping("/excluir/{idPessoa}")
-    public ResponseEntity<?> deletePessoa(
-            @PathVariable("idPessoa") Integer idPessoa) {
+    @DeleteMapping("/delete/{idPessoa}")
+    public ResponseEntity<?> deletePessoa(@PathVariable("idPessoa") Integer idPessoa) {
         pessoaService.deletePessoa(idPessoa);
         return new ResponseEntity<>(HttpStatus.OK);
     }

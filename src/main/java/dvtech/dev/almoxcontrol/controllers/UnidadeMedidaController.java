@@ -35,30 +35,26 @@ public class UnidadeMedidaController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<UnidadeMedida> getUnidadeMedidaById(
-            @PathVariable("id") Integer id) {
+    public ResponseEntity<UnidadeMedida> getUnidadeMedidaById(@PathVariable("id") Integer id) {
         UnidadeMedida um = umService.findUnidadeMedidaById(id);
         return new ResponseEntity<>(um, HttpStatus.OK);
     }
 
-    @PostMapping(path = "/criar")
-    public ResponseEntity<UnidadeMedida> createUnidadeMedida(
-            @RequestBody UnidadeMedida um) {
+    @PostMapping(path = "/create")
+    public ResponseEntity<UnidadeMedida> createUnidadeMedida(@RequestBody UnidadeMedida um) {
         UnidadeMedida umCreated = umService.addUnidadeMedida(um);
         return new ResponseEntity<>(umCreated, HttpStatus.CREATED);
     }
 
-    @PutMapping(path = "/atualizar")
-    public ResponseEntity<UnidadeMedida> updateUnidadeMedida(
-            @RequestBody UnidadeMedida um) {
+    @PutMapping(path = "/update")
+    public ResponseEntity<UnidadeMedida> updateUnidadeMedida(@RequestBody UnidadeMedida um) {
         UnidadeMedida umUpdated = umService.updateUnidadeMedida(um);
         return new ResponseEntity<>(umUpdated, HttpStatus.OK);
     }
 
     @Transactional
-    @DeleteMapping(path = "/excluir/{id}")
-    public ResponseEntity<?> deleteUnidadeMedida(
-            @PathVariable("id") Integer id) {
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<?> deleteUnidadeMedida(@PathVariable("id") Integer id) {
         umService.deleteUnidadeMedida(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
