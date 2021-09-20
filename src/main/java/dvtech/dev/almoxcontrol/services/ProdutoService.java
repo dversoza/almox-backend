@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import dvtech.dev.almoxcontrol.models.Produto;
@@ -19,8 +20,7 @@ public class ProdutoService {
     }
 
     public Produto addProduto(Produto produto) {
-        Optional<Produto> produtoOptional = produtoRepository
-                .findProdutoByNome(produto.getNome());
+        Optional<Produto> produtoOptional = produtoRepository.findProdutoByNome(produto.getNome());
         if (produtoOptional.isPresent()) {
             throw new IllegalArgumentException("Produto já cadastrado");
         } else {
@@ -29,8 +29,7 @@ public class ProdutoService {
     }
 
     public Produto updateProduto(Produto produto) {
-        Optional<Produto> produtoOptional = produtoRepository
-                .findById(produto.getId());
+        Optional<Produto> produtoOptional = produtoRepository.findById(produto.getId());
         if (produtoOptional.isPresent()) {
             return produtoRepository.save(produto);
         } else {
@@ -57,6 +56,6 @@ public class ProdutoService {
     }
 
     public List<Produto> findAllProdutos() {
-        return produtoRepository.findAll();
+        return produtoRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
     }
 }

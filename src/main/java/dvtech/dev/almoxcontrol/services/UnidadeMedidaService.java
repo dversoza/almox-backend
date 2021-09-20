@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import dvtech.dev.almoxcontrol.models.UnidadeMedida;
@@ -19,8 +20,7 @@ public class UnidadeMedidaService {
     }
 
     public UnidadeMedida addUnidadeMedida(UnidadeMedida um) {
-        Optional<UnidadeMedida> umOptional = umRepository
-                .findUnidadeMedidaByNome(um.getNome());
+        Optional<UnidadeMedida> umOptional = umRepository.findUnidadeMedidaByNome(um.getNome());
         if (umOptional.isPresent()) {
             throw new IllegalArgumentException("Unidade de Medida já existe!");
         } else {
@@ -29,13 +29,11 @@ public class UnidadeMedidaService {
     }
 
     public UnidadeMedida updateUnidadeMedida(UnidadeMedida um) {
-        Optional<UnidadeMedida> umOptional = umRepository
-                .findUnidadeMedidaById(um.getId());
+        Optional<UnidadeMedida> umOptional = umRepository.findUnidadeMedidaById(um.getId());
         if (umOptional.isPresent()) {
             return umRepository.save(um);
         } else {
-            throw new IllegalArgumentException(
-                    "Unidade de Medida não localizada!");
+            throw new IllegalArgumentException("Unidade de Medida não localizada!");
         }
     }
 
@@ -44,23 +42,20 @@ public class UnidadeMedidaService {
         if (umOptional.isPresent()) {
             umRepository.deleteById(id);
         } else {
-            throw new IllegalArgumentException(
-                    "Unidade de Medida não encontrada!");
+            throw new IllegalArgumentException("Unidade de Medida não encontrada!");
         }
     }
 
     public List<UnidadeMedida> findAllUnidadesMedidas() {
-        return umRepository.findAll();
+        return umRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
     }
 
     public UnidadeMedida findUnidadeMedidaById(Integer id) {
-        Optional<UnidadeMedida> umOptional = umRepository
-                .findUnidadeMedidaById(id);
+        Optional<UnidadeMedida> umOptional = umRepository.findUnidadeMedidaById(id);
         if (umOptional.isPresent()) {
             return umOptional.get();
         } else {
-            throw new IllegalArgumentException(
-                    "Unidade de Medida não encontrada!");
+            throw new IllegalArgumentException("Unidade de Medida não encontrada!");
         }
     }
 

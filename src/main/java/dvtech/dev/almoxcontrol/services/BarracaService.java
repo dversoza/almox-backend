@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import dvtech.dev.almoxcontrol.exceptions.BarracaNotFoundException;
@@ -20,19 +21,17 @@ public class BarracaService {
     }
 
     public Barraca addBarraca(Barraca barraca) {
-        Optional<Barraca> barracaOptional = barracaRepository
-                .findBarracaByNome(barraca.getNome());
+        Optional<Barraca> barracaOptional = barracaRepository.findBarracaByNome(barraca.getNome());
         if (barracaOptional.isPresent()) {
             throw new IllegalStateException("A barraca '" + barraca.getNome()
-                    + "' já existe e está cadastrada com o id "
-                    + barracaOptional.get().getId() + ".");
+                    + "' já existe e está cadastrada com o id " + barracaOptional.get().getId() + ".");
         } else {
             return barracaRepository.save(barraca);
         }
     }
 
     public List<Barraca> findAllBarracas() {
-        return barracaRepository.findAll();
+        return barracaRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
     }
 
     public Barraca updateBarraca(Barraca barraca) {
@@ -41,8 +40,7 @@ public class BarracaService {
 
     public void deleteBarraca(Integer idBarraca) {
         if (!barracaRepository.existsById(idBarraca)) {
-            throw new IllegalStateException(
-                    "Não existe uma barraca com o id " + idBarraca + ".");
+            throw new IllegalStateException("Não existe uma barraca com o id " + idBarraca + ".");
         } else {
             barracaRepository.deleteById(idBarraca);
         }
@@ -50,7 +48,6 @@ public class BarracaService {
 
     public Barraca findBarracaById(Integer idBarraca) {
         return barracaRepository.findById(idBarraca)
-                .orElseThrow(() -> new BarracaNotFoundException(
-                        "Barraca não encontrada pelo id" + idBarraca));
+                .orElseThrow(() -> new BarracaNotFoundException("Barraca não encontrada pelo id" + idBarraca));
     }
 }
