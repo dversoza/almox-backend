@@ -11,11 +11,9 @@ import dvtech.dev.almoxcontrol.models.Barraca;
 import dvtech.dev.almoxcontrol.models.Movimentacao;
 
 @Repository
-public interface MovimentacaoRepository
-                extends JpaRepository<Movimentacao, Long> {
+public interface MovimentacaoRepository extends JpaRepository<Movimentacao, Long> {
 
-        Optional<List<Movimentacao>> findMovimentacoesByBarraca(
-                        Barraca barraca);
+        Optional<List<Movimentacao>> findMovimentacoesByBarraca(Barraca barraca);
 
         Optional<List<Movimentacao>> findMovimentacoesByDataFato(Date dataFato);
 

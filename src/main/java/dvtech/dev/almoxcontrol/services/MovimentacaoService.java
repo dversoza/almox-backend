@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import dvtech.dev.almoxcontrol.models.Barraca;
@@ -28,8 +29,7 @@ public class MovimentacaoService {
     }
 
     public Movimentacao updateMovimentacao(Movimentacao movimentacao) {
-        Optional<Movimentacao> opt = movimentacaoRepository
-                .findById(movimentacao.getId());
+        Optional<Movimentacao> opt = movimentacaoRepository.findById(movimentacao.getId());
         if (opt.isPresent()) {
             return movimentacaoRepository.save(movimentacao);
         } else {
@@ -56,18 +56,16 @@ public class MovimentacaoService {
     }
 
     public List<Movimentacao> findAllMovimentacoes() {
-        return movimentacaoRepository.findAll();
+        return movimentacaoRepository.findAll(Sort.by(Sort.Direction.DESC, "dataFato"));
     }
 
     public List<Movimentacao> findMovimentacaoByBarraca(Barraca barraca) {
         return movimentacaoRepository.findMovimentacoesByBarraca(barraca)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Nenhuma movimentação encontrada!"));
+                .orElseThrow(() -> new IllegalArgumentException("Nenhuma movimentação encontrada!"));
     }
 
     public List<Movimentacao> findMovimentacaoByDataFato(Date dataFato) {
         return movimentacaoRepository.findMovimentacoesByDataFato(dataFato)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Nenhuma movimentação encontrada!"));
+                .orElseThrow(() -> new IllegalArgumentException("Nenhuma movimentação encontrada!"));
     }
 }
