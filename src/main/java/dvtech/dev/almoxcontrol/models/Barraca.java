@@ -77,6 +77,7 @@ public class Barraca implements Serializable {
         this.responsavel = responsavel;
     }
 
+    @ElementCollection
     public List<MovimentacaoEstoque> getEstoque() {
         return estoque;
     }
