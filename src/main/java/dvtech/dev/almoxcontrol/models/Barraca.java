@@ -25,6 +25,7 @@ public class Barraca implements Serializable {
     @JsonIgnoreProperties(value = { "barraca" }, allowSetters = true)
     private Pessoa responsavel;
 
+    @ElementCollection
     @Formula("(select p.nome produto, sum(case when mov.operacao = 'ENTRADA' then mov.quantidade else mov.quantidade * -1 end) quantidade from movimentacao mov inner join produto p on p.id = mov.produto where mov.barraca = id group by mov.produto)")
     private List<MovimentacaoEstoque> estoque;
 
