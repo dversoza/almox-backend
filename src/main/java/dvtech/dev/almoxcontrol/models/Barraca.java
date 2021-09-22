@@ -1,10 +1,13 @@
 package dvtech.dev.almoxcontrol.models;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import org.hibernate.annotations.Formula;
 
 @Entity
 @Table
@@ -22,11 +25,13 @@ public class Barraca implements Serializable {
     @JsonIgnoreProperties(value = { "barraca" }, allowSetters = true)
     private Pessoa responsavel;
 
+    @Formula("(select p.nome, sum(case when mov.operacao = 'ENTRADA' then mov.quantidade else mov.quantidade * -1 end) from movimentacao mov inner join produto p on p.id = mov.produto where mov.barraca = id GROUP BY mov.produto)")
+    private List<MovimentacaoEstoque> estoque;
+
     public Barraca() {
     }
 
-    public Barraca(Integer id, String nome, String contato,
-            Pessoa responsavel) {
+    public Barraca(Integer id, String nome, String contato, Pessoa responsavel) {
         this.id = id;
         this.nome = nome;
         this.contato = contato;
@@ -71,9 +76,13 @@ public class Barraca implements Serializable {
         this.responsavel = responsavel;
     }
 
+    public List<MovimentacaoEstoque> getEstoque() {
+        return estoque;
+    }
+
     @Override
     public String toString() {
-        return "Barraca [contato=" + contato + ", id=" + id + ", nome=" + nome
-                + ", responsavel=" + responsavel + "]";
+        return "Barraca {contato=" + contato + ", id=" + id + ", nome=" + nome + ", estoque=" + estoque
+                + ", responsavel=" + responsavel + "}";
     }
 }
